@@ -9,7 +9,7 @@ class GhostParser
     @file_path = file_path
   end
 
-  def parse(options = {}, &block)
+  def parse(attributes = nil, options = {}, &block)
     raise "File not found" if !File.exist?(file_path)
     file = File.read(file_path)
     json_array = JsonParser.new(file).call
@@ -19,7 +19,7 @@ class GhostParser
       config.each do |k, v|
         result[k] = json[v]
       end
-      result.merge!(options) if !options.empty?
+      result.merge!(attributes) if !attributes.nil?
       yield(result) if block_given?
       result_array << result
     end
@@ -27,26 +27,25 @@ class GhostParser
   end
 
   def config
-    @@config ||= default_config
+    @@config ||= self.default_config
   end
 
-  class << self
+  def self.set_config(params = nil)
+    @@config = params || default_config
+  end
 
-    def set_config(params = nil)
-      @@config = params || default_config
-    end
+  private
 
-    def default_config
-      {
-        id: "id",
-        title: "title",
-        slug: "slug",
-        html: "html",
-        feature_image: "feature_image",
-        created_at: "created_at",
-        updated_at: "updated_at",
-        published_at: "published_at"
-      }
-    end
+  def default_config
+    {
+      id: "id",
+      title: "title",
+      slug: "slug",
+      html: "html",
+      feature_image: "feature_image",
+      created_at: "created_at",
+      updated_at: "updated_at",
+      published_at: "published_at"
+    }
   end
 end
