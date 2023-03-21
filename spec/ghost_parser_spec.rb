@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require "byebug"
+
 RSpec.describe GhostParser do
 
   it "Parses Json" do
