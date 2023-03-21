@@ -42,6 +42,7 @@ class GhostParser
       title: "title",
       slug: "slug",
       html: "html",
+      status: "status",
       feature_image: "feature_image",
       created_at: "created_at",
       updated_at: "updated_at",

@@ -5,7 +5,7 @@ RSpec.describe GhostParser do
   it "Parses Json" do
     file_path = "#{__dir__}/fixtures/sample_ghost_export.json"
     parsed_file = GhostParser.new(file_path).parse
-    expect(parsed_file[0].keys).to eq([:id, :title, :slug, :html, :feature_image, :created_at, :updated_at, :published_at])
+    expect(parsed_file[0].keys).to eq([:id, :title, :slug, :html, :feature_image, :created_at, :updated_at, :published_at, :status])
   end
 
   it "Sets custom json" do
