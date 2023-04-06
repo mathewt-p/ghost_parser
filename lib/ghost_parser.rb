@@ -63,8 +63,8 @@ class GhostParser
       Warning.warn "Ghost url has not been initialized, urls in the export will not be valid"
     else
       result_array.each do |result|
-        result[config.key("html")] = format_html_content(result[:html]) if config.key("html")
-        result[config.key("feature_image")] = format_feature_image(result[:feature_image]) if config.key("feature_image")
+        result[config.key("html")] = format_html_content(result[config.key("html")]) if config.key("html")
+        result[config.key("feature_image")] = format_feature_image(result[config.key("feature_image")]) if config.key("feature_image")
       end
     end
     result_array

@@ -43,4 +43,25 @@ RSpec.describe GhostParser do
     parsed_file = GhostParser.new(file_path).parse
     expect(parsed_file.last[:feature_image].include?(ghost_url)).to eq(true)
   end
+
+  it "Parses Json and formats urls" do
+    file_path = "#{__dir__}/fixtures/sample_ghost_export.json"
+    ghost_url = "https://example.com"
+    GhostParser.set_config(
+      {
+        title: "title",
+        slug: "slug",
+        content: "html",
+        feature_image: "feature_image",
+        created_at: "created_at",
+        updated_at: "updated_at",
+        published_at: "published_at",
+        status: "status"
+      }
+    )
+    GhostParser.set_ghost_url ghost_url
+    parsed_file = GhostParser.new(file_path).parse
+    expect(parsed_file.last[:feature_image].include?(ghost_url)).to eq(true)
+    expect(parsed_file.last[:content].empty?).to eq(false)
+  end
 end
